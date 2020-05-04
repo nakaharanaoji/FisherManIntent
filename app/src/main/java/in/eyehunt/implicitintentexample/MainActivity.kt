@@ -44,9 +44,15 @@ class MainActivity : AppCompatActivity() {
 
         //Contact
         btn_contact.setOnClickListener(View.OnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = ContactsContract.Contacts.CONTENT_TYPE
-            startActivity(intent)
+            val gmmIntentUri = Uri.parse("geo:38.274633,140.868969")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            }
+//           val intent = Intent(Intent.ACTION_PICK)
+//            intent.type = ContactsContract.Contacts.CONTENT_TYPE
+//            startActivity(intent)
         })
 
         // browser
@@ -58,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         // Gallery
         btn_gallery.setOnClickListener(View.OnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW)
+              val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("content://media/external/images/media/")
             startActivity(intent)
         })
